@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>The Rally Club - MIB Sports</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fontawesome-all.css">
+    <link rel="stylesheet" href="css/slick-slider.css">
+    <link rel="stylesheet" href="css/fancybox.css">
+    <link rel="stylesheet" href="css/smartmenus.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        .reload-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            box-sizing: border-box;
+            min-height: 100dvh;
+            min-height: 100vh;
+            padding: max(12px, env(safe-area-inset-top, 0px))
+                     max(12px, env(safe-area-inset-right, 0px))
+                     max(12px, env(safe-area-inset-bottom, 0px))
+                     max(12px, env(safe-area-inset-left, 0px));
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        .reload-modal-overlay.is-open {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .reload-modal {
+            position: relative;
+            width: fit-content;
+            width: -moz-fit-content;
+            max-width: min(640px, 88vw);
+            min-width: 0;
+            margin: auto;
+            flex-shrink: 0;
+        }
+        .reload-modal-inner {
+            position: relative;
+            display: block;
+            max-width: 100%;
+            max-height: 72dvh;
+            max-height: 72vh;
+        }
+        .reload-modal-inner img {
+            max-width: 100%;
+            max-height: 72dvh;
+            max-height: 72vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: clamp(6px, 2vw, 10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+        }
+        .reload-modal-close {
+            position: absolute;
+            z-index: 1;
+            top: 6px;
+            right: 6px;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            border: 0;
+            cursor: pointer;
+            background: #ffffff;
+            color: #111;
+            font-size: 16px;
+            line-height: 28px;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            touch-action: manipulation;
+            padding: 0;
+        }
+        .reload-modal-close:focus { outline: 3px solid rgba(255, 197, 41, 0.6); outline-offset: 2px; }
+        body.reload-modal-open { overflow: hidden; }
+
+        @media (max-width: 576px) {
+            .reload-modal-overlay {
+                padding: max(8px, env(safe-area-inset-top, 0px))
+                         max(8px, env(safe-area-inset-right, 0px))
+                         max(8px, env(safe-area-inset-bottom, 0px))
+                         max(8px, env(safe-area-inset-left, 0px));
+            }
+            .reload-modal {
+                max-width: min(92vw, 360px);
+            }
+            .reload-modal-inner {
+                max-height: 68dvh;
+                max-height: 68vh;
+            }
+            .reload-modal-inner img {
+                max-height: 68dvh;
+                max-height: 68vh;
+            }
+            .reload-modal-close {
+                top: 4px;
+                right: 4px;
+                width: 24px;
+                height: 24px;
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body class="home">
+    <div id="rallyPageModalOverlay" class="reload-modal-overlay" role="dialog" aria-modal="true" aria-label="The Rally Club">
+        <div class="reload-modal" role="document">
+            <div class="reload-modal-inner">
+                <button type="button" id="rallyPageModalClose" class="reload-modal-close" aria-label="Close">×</button>
+                <img id="rallyPageModalImage" src="images/modal.png" alt="The Rally Club">
+            </div>
+        </div>
+    </div>
+
+    <div class="ritekhela-wrapper">
+
+        <header id="ritekhela-header" class="ritekhela-header-one">
+            <div class="ritekhela-main-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="index.html" class="ritekhela-logo"><img src="team/MIB_Sports_logo.png" alt="" style="margin-left:30%;"></a>
+                            <div class="ritekhela-right-section">
+                                <div class="ritekhela-navigation">
+                                    <span class="ritekhela-menu-link">
+                                        <span class="menu-bar"></span>
+                                        <span class="menu-bar"></span>
+                                        <span class="menu-bar"></span>
+                                    </span>
+                                    <nav id="main-nav">
+                                        <ul id="main-menu" class="sm sm-blue">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="index-about.html">About Us</a>
+                                                <ul>
+                                                    <li><a href="about.html">Vision</a></li>
+                                                    <li><a href="about.html#missiob">Mission</a></li>
+                                                    <li><a href="about.html#aim">Aim</a></li>
+                                                    <li><a href="about.html#our-commitment">Our Commitment</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Services</a>
+                                                <ul>
+                                                    <li><a href="service.html#headingOne">Sports facility construction</a></li>
+                                                    <li><a href="service.html#headingTwo">Sports infrastructure building</a></li>
+                                                    <li><a href="service.html#headingThree">Sports manpower supply</a></li>
+                                                    <li><a href="service.html#headingFour">Sports equipment supply</a></li>
+                                                    <li><a href="service.html#headingFive">Sports clothing and athlete apparel</a></li>
+                                                    <li><a href="service.html#headingSix">Sports healthcare and physiotherapy solutions</a></li>
+                                                    <li><a href="service.html#headingseven">Sports analytics and performance tracking</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="active"><a href="#">Our Projects</a>
+                                                <ul>
+                                                   <li><a href="rally-club.html">The Rally Club</a></li>
+                                                   <li><a href="404.html">Project-2</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="team.html">Our Team</a></li>
+                                            <li><a href="contact.html">Contact Us</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="ritekhela-subheader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>The Rally Club</h1>
+                        <ul class="ritekhela-breadcrumb">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#">Our Projects</a></li>
+                            <li>The Rally Club</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ritekhela-main-content">
+
+            <div class="ritekhela-main-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ritekhela-fancy-title-two">
+                                <h2>Rally Club</h2>
+                            </div>
+                            <div class="ritekhela-editor-detail">
+                                <p>Rally Club is a modern racquet-sports platform built around a simple idea: sport should open doors. It brings people together to play, compete, network, and grow through well-designed weekly events that combine racquet sports, food, and social connection into one experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ritekhela-main-section ritekhela-fixture-list-full" style="padding-bottom: 40px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="ritekhela-fancy-title-two">
+                                <h2>What Rally Club Does</h2>
+                            </div>
+                            <p>Rally Club curates year-round weekly tournaments across racquet sports, starting with padel and expanding into pickleball, badminton, and tennis. The monthly rhythm is designed to keep the community engaged, with one featured tournament each week of the month so players can return regularly, build familiarity, and form relationships over time.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <figure class="ritekhela-post-thumb">
+                                <img src="images/img-1.png" alt="Racquet Sports Action" style="width:100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ritekhela-main-section" style="padding-top: 40px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure class="ritekhela-post-thumb">
+                                <img src="images/img-3.png" alt="Community Interaction" style="width:100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            </figure>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ritekhela-fancy-title-two">
+                                <h2>Beyond Competition</h2>
+                            </div>
+                            <p>Rally Club is designed as a community engine where people can compete seriously, discover new sports, and build real-world relationships in a natural setting. The concept evolves through phases: accessible tournaments, rankings for progression, and eventually structured professional leagues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ritekhela-main-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="ritekhela-fancy-title-two">
+                                <h2>The Rally Club Experience</h2>
+                            </div>
+                            <p>Racquet communities grow faster when tournaments are paired with mixers and food-and-drink moments. Each event extends beyond the court with post-tournament networking sessions and hosted socials. Players come for the sport, and stay for the community.</p>
+                        </div>
+                        <div class="col-md-5">
+                            <figure class="ritekhela-post-thumb">
+                                <img src="images/img-2.png" alt="Professional Networking" style="width:100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ritekhela-main-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ritekhela-fancy-title-two">
+                                <h2>How the Model Evolves</h2>
+                            </div>
+                            <p>The long-term model is scalable: repeatable weekly tournaments, performance rankings, and flagship leagues. Our hybrid layer includes:</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul class="ritekhela-list-style-one">
+                                        <li>Skill-based matchmaking</li>
+                                        <li>Beginner-friendly ladders</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="ritekhela-list-style-one">
+                                        <li>Corporate cups & mixed formats</li>
+                                        <li>Digital player profiles</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="ritekhela-list-style-one">
+                                        <li>Curated networking zones</li>
+                                        <li>Partner discovery tools</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer id="ritekhela-footer" class="ritekhela-footer-one">
+            <div class="ritekhela-footer-widget">
+                <div class="container">
+                    <div class="row">
+                        <aside class="widget col-md-4 widget_about_info">
+                           <a href="index.html"><img src="team/MIB_Sports_logo.png" alt="" ></a>
+                            <ul>
+                                <li><i class="fa fa-phone"></i> (+91 ) 9459916666</li>
+                                <li><i class="fa fa-envelope"></i> <a href="#" style="color:white">mibsports@gmail.com</a></li>
+                            </ul>
+                        </aside>
+                        <aside class="widget col-md-4 widget_twitter_feeds">
+                            <div class="footer_widget_title"> <h2>Social Media</h2> </div>
+                            <div class="widget_about_info_social">
+                                <a href="#" class="fab fa-facebook-f"></a>
+                                <a href="#" class="fab fa-twitter"></a>
+                                <a href="#" class="fab fa-instagram"></a>
+                                <a href="#" class="fab fa-linkedin-in"></a>
+                                <a href="#" class="fab fa-youtube"></a>    
+                            </div>
+                        </aside>
+                        <aside class="widget col-md-4 widget_gallery">
+                            <div class="footer_widget_title"> <h2>Gallery</h2> </div>
+                            <ul>
+                                <li><a data-fancybox-group="group" href="extra-images/widget-gallery-1.jpg" class="fancybox"><img src="extra-images/widget-gallery-1.jpg" alt=""></a></li>
+                                <li><a data-fancybox-group="group" href="extra-images/widget-gallery-2.jpg" class="fancybox"><img src="extra-images/widget-gallery-2.jpg" alt=""></a></li>
+                                <li><a data-fancybox-group="group" href="extra-images/widget-gallery-3.jpg" class="fancybox"><img src="extra-images/widget-gallery-3.jpg" alt=""></a></li>
+                                <li><a data-fancybox-group="group" href="extra-images/widget-gallery-4.jpg" class="fancybox"><img src="extra-images/widget-gallery-4.jpg" alt=""></a></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+            <div class="ritekhela-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><a href="#" target="_blank" style="color:white">MIB Sports</a></p>
+                            <a href="#" class="ritekhela-back-top"><i class="fa fa-angle-up"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </footer>
+    </div>
+
+    <script src="script/jquery.js"></script>
+    <script src="script/popper.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/slick.slider.min.js"></script>
+    <script src="script/fancybox.min.js"></script>
+    <script src="script/smartmenus.min.js"></script>
+    <script src="script/functions.js"></script>
+
+    <script>
+        (function () {
+            var overlay = document.getElementById('rallyPageModalOverlay');
+            var closeBtn = document.getElementById('rallyPageModalClose');
+
+            if (!overlay || !closeBtn) return;
+
+            function openModal() {
+                overlay.classList.add('is-open');
+                document.body.classList.add('reload-modal-open');
+                closeBtn.focus();
+            }
+
+            function closeModal() {
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('reload-modal-open');
+            }
+
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', openModal);
+            } else {
+                openModal();
+            }
+        })();
+    </script>
+</body>
+</html>
