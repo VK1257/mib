@@ -22,6 +22,112 @@
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
 
+    <style>
+        .reload-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            box-sizing: border-box;
+            min-height: 100dvh;
+            min-height: 100vh;
+            padding: max(12px, env(safe-area-inset-top, 0px))
+                     max(12px, env(safe-area-inset-right, 0px))
+                     max(12px, env(safe-area-inset-bottom, 0px))
+                     max(12px, env(safe-area-inset-left, 0px));
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        .reload-modal-overlay.is-open {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .reload-modal {
+            position: relative;
+            width: fit-content;
+            width: -moz-fit-content;
+            max-width: min(640px, 88vw);
+            min-width: 0;
+            margin: auto;
+            flex-shrink: 0;
+        }
+        .reload-modal-inner {
+            position: relative;
+            display: block;
+            max-width: 100%;
+            max-height: 72dvh;
+            max-height: 72vh;
+        }
+        .reload-modal-inner img {
+            max-width: 100%;
+            max-height: 72dvh;
+            max-height: 72vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: clamp(6px, 2vw, 10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+            cursor: pointer;
+        }
+        .reload-modal-close {
+            position: absolute;
+            z-index: 1;
+            top: 6px;
+            right: 6px;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            border: 0;
+            cursor: pointer;
+            background: #ffffff;
+            color: #111;
+            font-size: 16px;
+            line-height: 28px;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            touch-action: manipulation;
+            padding: 0;
+        }
+        .reload-modal-close:focus { outline: 3px solid rgba(255, 197, 41, 0.6); outline-offset: 2px; }
+        body.reload-modal-open { overflow: hidden; }
+
+        @media (max-width: 576px) {
+            .reload-modal-overlay {
+                padding: max(8px, env(safe-area-inset-top, 0px))
+                         max(8px, env(safe-area-inset-right, 0px))
+                         max(8px, env(safe-area-inset-bottom, 0px))
+                         max(8px, env(safe-area-inset-left, 0px));
+            }
+            .reload-modal {
+                max-width: min(92vw, 360px);
+            }
+            .reload-modal-inner {
+                max-height: 68dvh;
+                max-height: 68vh;
+            }
+            .reload-modal-inner img {
+                max-height: 68dvh;
+                max-height: 68vh;
+            }
+            .reload-modal-close {
+                top: 4px;
+                right: 4px;
+                width: 24px;
+                height: 24px;
+                font-size: 14px;
+                line-height: 24px;
+            }
+        }
+
+    </style>
+
 </head>
 
 <body class="home">
@@ -31,6 +137,16 @@
             <div id="ritekhela-box"></div>
         </div>
     </div> -->
+
+    <!-- Reload popup modal -->
+    <div id="reloadModalOverlay" class="reload-modal-overlay" role="dialog" aria-modal="true" aria-label="Announcement">
+        <div class="reload-modal" role="document">
+            <div class="reload-modal-inner">
+                <button type="button" id="reloadModalClose" class="reload-modal-close" aria-label="Close">×</button>
+                <img id="reloadModalImage" src="images/rally-home.png" alt="Rally Club">
+            </div>
+        </div>
+    </div>
 
     <div class="ritekhela-wrapper">
 
@@ -730,6 +846,48 @@
     <script src="script/progressbar.js"></script>
     <script src="script/jquery.countdown.min.js"></script>
     <script src="script/functions.js"></script>
+
+    <script>
+        (function () {
+            var overlay = document.getElementById('reloadModalOverlay');
+            var closeBtn = document.getElementById('reloadModalClose');
+            var image = document.getElementById('reloadModalImage');
+
+            if (!overlay || !closeBtn || !image) return;
+
+            function openModal() {
+                overlay.classList.add('is-open');
+                document.body.classList.add('reload-modal-open');
+                closeBtn.focus();
+            }
+
+            function closeModal() {
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('reload-modal-open');
+            }
+
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+            image.addEventListener('click', function () {
+                window.location.href = 'rallyclub.html';
+            });
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', openModal);
+            } else {
+                openModal();
+            }
+        })();
+    </script>
 </body>
 
 
