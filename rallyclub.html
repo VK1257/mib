@@ -92,6 +92,42 @@
         .reload-modal-close:focus { outline: 3px solid rgba(255, 197, 41, 0.6); outline-offset: 2px; }
         body.reload-modal-open { overflow: hidden; }
 
+        .rally-ticket-action {
+            text-align: center;
+            margin: 18px 0 0;
+        }
+        .rally-ticket-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            border: 0;
+            cursor: pointer;
+            background: #2e4e8f;
+            color: #fff;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            text-transform: none;
+            box-shadow: 0 10px 25px rgba(46, 78, 143, 0.35);
+            animation: rallyPulse 1.5s ease-in-out infinite;
+        }
+        .rally-ticket-btn:hover,
+        .rally-ticket-btn:focus {
+            color: #fff;
+            outline: none;
+            box-shadow: 0 14px 34px rgba(46, 78, 143, 0.45);
+        }
+        @keyframes rallyPulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(46, 78, 143, 0.35); }
+            50% { transform: scale(1.06); box-shadow: 0 18px 45px rgba(46, 78, 143, 0.55); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(46, 78, 143, 0.35); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rally-ticket-btn { animation: none; }
+        }
+
         @media (max-width: 576px) {
             .reload-modal-overlay {
                 padding: max(8px, env(safe-area-inset-top, 0px))
@@ -118,6 +154,10 @@
                 font-size: 14px;
                 line-height: 24px;
             }
+            .rally-ticket-btn {
+                width: 100%;
+                max-width: 360px;
+            }
         }
     </style>
 </head>
@@ -128,6 +168,15 @@
             <div class="reload-modal-inner">
                 <button type="button" id="rallyPageModalClose" class="reload-modal-close" aria-label="Close">×</button>
                 <img id="rallyPageModalImage" src="images/modal.png" alt="The Rally Club">
+            </div>
+        </div>
+    </div>
+
+    <div id="rallyTicketModalOverlay" class="reload-modal-overlay" role="dialog" aria-modal="true" aria-label="Get your ticket">
+        <div class="reload-modal" role="document">
+            <div class="reload-modal-inner">
+                <button type="button" id="rallyTicketModalClose" class="reload-modal-close" aria-label="Close">×</button>
+                <a href="images/rally-club-c1.jpg" download=""><img id="rallyTicketModalImage" src="images/rally-club-c1.jpg" alt="Rally Club Ticket"></a>
             </div>
         </div>
     </div>
@@ -197,13 +246,16 @@
                             <li><a href="#">Our Projects</a></li>
                             <li>The Rally Club</li>
                         </ul>
+
+                        <div class="rally-ticket-action">
+                            <button type="button" id="openTicketModalBtn" class="rally-ticket-btn"><a href="images/rally-club-c1.jpg" download="">Get your Ticket</a></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="ritekhela-main-content">
-
             <div class="ritekhela-main-section">
                 <div class="container">
                     <div class="row">
@@ -399,5 +451,40 @@
             }
         })();
     </script>
+
+    <script>
+        (function () {
+            var overlay = document.getElementById('rallyTicketModalOverlay');
+            var openBtn = document.getElementById('openTicketModalBtn');
+            var closeBtn = document.getElementById('rallyTicketModalClose');
+
+            if (!overlay || !openBtn || !closeBtn) return;
+
+            function openModal() {
+                overlay.classList.add('is-open');
+                document.body.classList.add('reload-modal-open');
+                closeBtn.focus();
+            }
+
+            function closeModal() {
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('reload-modal-open');
+            }
+
+            openBtn.addEventListener('click', openModal);
+            closeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeModal();
+            });
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+            });
+        })();
+    </script>
+
 </body>
 </html>

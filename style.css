@@ -425,6 +425,21 @@ address                         { font-style: italic; }
     width: 100%;
     position: relative;
 }
+.ritekhela-banner-one-layer > img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+}
+.ritekhela-banner-one .slick-slide,
+.ritekhela-banner-one .slick-list,
+.ritekhela-banner-one .slick-track {
+    height: 520px;
+}
+.ritekhela-banner-one-layer {
+    height: 520px;
+    overflow: hidden;
+}
 .ritekhela-banner-one:before {
     content: '';
     position: absolute;
@@ -463,6 +478,18 @@ address                         { font-style: italic; }
     z-index: 1;
     text-align: center;
     margin-top: -190px;
+}
+
+@media (max-width: 768px) {
+    .ritekhela-banner-one-layer > img,
+    .ritekhela-banner-one .slick-slide,
+    .ritekhela-banner-one .slick-list,
+    .ritekhela-banner-one .slick-track,
+    .ritekhela-banner-one-layer {
+        height: 360px;
+    }
+    .ritekhela-banner-caption { margin-top: -140px; }
+    .ritekhela-banner-caption h1 { font-size: 32px; width: 92%; }
 }
 .ritekhela-banner-caption h1 {
     display: inline-block;
